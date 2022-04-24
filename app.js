@@ -56,12 +56,18 @@ const post1 = new Post({ title: "My First Post", body: "This is a post", descrip
 const post2 = new Post({ title: "Second Post Here", body: "Hello World!", description: "Second Description" });
 const post3 = new Post({ title: "Third Post Here", body: "Goodbye World!", description: "Third Description" });
 
-const posts = [post1, post2, post3];
+const posts = [];
+
 
 
 // App Get
 
 app.get("/", function(req, res) {
+
+    if (!posts) {
+        posts = [post1, post2, post3];
+        posts.save();
+    }
     res.render('home', {
         content: homeContent,
         timeOfDay: dayContent,
